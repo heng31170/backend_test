@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zaizi.mapper.PostingMapper">
+
+
+<!--    插入-->
+    <insert id="addPosting" parameterType="com.zaizi.pojo.Posting" useGeneratedKeys="true" keyProperty="pid">
+        insert into postings (title, text, tags, account, files, time, thumbPic, thumbPicWidth, thumbPicHeight)
+            values (
+                    <if test="title != null">#{title}</if>,
+                    <if test="text != null">#{text}</if>,
+                    <if test="tags != null">#{tags}</if>,
+                    <if test="account != null">#{account}</if>,
+                    <if test="files != null">#{files}</if>,
+                    <choose>
+                        <when test="time != null">#{time}</when>
+                        <otherwise>UNIX_TIMESTAMP()</otherwise>
+                    </choose>,
+                    <if test="thumbPic != null">#{thumbPic}</if>,
+                    <if test="thumbPicWidth != null">#{thumbPicWidth}</if>,
+                    <if test="thumbPicHeight != null">#{thumbPicHeight}</if>
+                   )
+    </insert>
+<!--    更新-->
+    <update id="updatePosting" parameterType="com.zaizi.pojo.Posting">
+        update postings
+            <set>
+                <if test="title != null and title != ''">title = #{title},</if>
+                <if test="text != null and text != ''">text = #{text},</if>
+                <if test="tags != null and tags != ''">tags = #{tags},</if>
+                <if test="account != null and account != ''">account = #{account},</if>
+                <if test="files != null and files != ''">files = #{files},</if>
+                <if test="time != null and time != ''">time = #{time},</if>
+                <if test="thumbPic != null and thumbPic != ''">thumbPic = #{thumbPic},</if>
+                <if test="thumbPicWidth != null and thumbPicWidth != ''">thumbPicWidth = #{thumbPicWidth},</if>
+                <if test="thumbPicHeight != null and thumbPicHeight != ''">thumbPicHeight = #{thumbPicHeight}</if>
+            </set>
+        where pid = #{pid}
+    </update>
+</mapper>
