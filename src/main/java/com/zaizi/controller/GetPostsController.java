@@ -97,6 +97,22 @@ public class GetPostsController {
             return ResponseEntity.badRequest().body(Map.of("error","error:"+e.getMessage()));
         }
     }
+    // 搜索帖子
+    @GetMapping("/api/posting/search")
+    public ResponseEntity<?> searchPosts(@RequestParam(value = "user",required = false) String account,
+                                         @RequestParam(value = "pid",required = false) Integer pid,
+                                         @RequestParam(value = "title",required = false) String title,
+                                         @RequestParam(value = "text",required = false) String text
+                                         ) {
+        log.info("搜索帖子操作，用户：{},pid：{},标题：{}，内容：{}",account,pid,title,text);
+        try {
+            List<Posting> postings = getPostsService.searchPosts(account,pid,title,text);
+            return ResponseEntity.ok(Map.of("postings",postings));
+        } catch (Exception e) {
+            log.info("搜索失败:{}",e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message","error"));
+        }
+    }
 
 
 

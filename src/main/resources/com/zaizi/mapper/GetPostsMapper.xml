@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zaizi.mapper.GetPostsMapper">
+
+    <select id="searchPosts" resultType="com.zaizi.pojo.Posting">
+        SELECT pid, title, text, tags, account, files, time, thumbPic, thumbPicWidth, thumbPicHeight, is_liked
+        FROM postings
+        <where>
+            <if test="account != null and account != ''">
+                account = #{account}
+            </if>
+            <if test="pid != null and pid != ''">
+                AND pid = #{pid}
+            </if>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="text != null and text != ''">
+                AND text LIKE CONCAT('%', #{text}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

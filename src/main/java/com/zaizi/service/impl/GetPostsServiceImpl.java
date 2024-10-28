@@ -49,4 +49,10 @@ public class GetPostsServiceImpl implements GetPostsService {
         return getPostsMapper.getFollowPosts(account);
     }
 
+    // 搜索帖子
+    @Override
+    public List<Posting> searchPosts(String account,Integer pid,String title,String text) {
+        return getPostsMapper.searchPosts(account, pid, title, text);
+    }
+
 }

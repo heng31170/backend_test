@@ -25,7 +25,7 @@ public class UserController {
         User u = userService.login(user);
         if(u != null) {
             Map<String,Object> res = new HashMap<>();
-            res.put("status","sussess");
+            res.put("status","success");
             res.put("message","success to login");
             Map<String,Object> user1 = new HashMap<>();
             user1.put("account",u.getAccount());
@@ -66,7 +66,7 @@ public class UserController {
     // update
     @PostMapping("/api/update/user")
     public ResponseEntity<?> update(@RequestBody User user) {
-        log.info("更新用户操作:{}",user);
+        log.info("更新用户操作:");
         try {
             if(user.getPasswd().isEmpty()) {
                 log.info("input new passwd please");
@@ -89,12 +89,13 @@ public class UserController {
         try {
             User u = userService.getUser(account);
             if(u == null) {
-                return ResponseEntity.badRequest().body(Map.of("status","failed","message","failed to get user"));
+                return ResponseEntity.badRequest().body(Map.of("message","not found"));
             }
             HashMap<String,Object> res = new HashMap<>();
             res.put("message","success to get userInfo");
             res.put("user",u.getAccount());
             res.put("icon",u.getIcon());
+            res.put("nickname",u.getNickname());
             return ResponseEntity.ok(res);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(Map.of("message","not found"));
