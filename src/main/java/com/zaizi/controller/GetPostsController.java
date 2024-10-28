@@ -108,6 +108,7 @@ public class GetPostsController {
         try {
             List<Posting> postings = getPostsService.searchPosts(account,pid,title,text);
             return ResponseEntity.ok(Map.of("postings",postings));
+
         } catch (Exception e) {
             log.info("搜索失败:{}",e.getMessage());
             return ResponseEntity.badRequest().body(Map.of("message","error"));
