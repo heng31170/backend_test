@@ -19,4 +19,6 @@ public interface GetPostsService {
     List<Posting> getSepcifyPosts(String account);
     // 获取动态
     List<Posting> getFollowPosts(String account);
+    // 搜索帖子
+    List<Posting> searchPosts(String account,Integer pid,String title,String text);
 }

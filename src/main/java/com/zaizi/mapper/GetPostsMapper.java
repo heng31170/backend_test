@@ -32,6 +32,8 @@ public interface GetPostsMapper {
     @Select("SELECT p.pid, p.title, p.text, p.tags, p.account, p.files, p.time, p.thumbPic, p.thumbPicWidth, p.thumbPicHeight, p.is_liked " +
             "FROM subscribes s JOIN postings p ON s.subscribedAccount = p.account WHERE s.account = #{account}")
     List<Posting> getFollowPosts(@Param("account") String account);
+    // 搜索帖子
+    List<Posting> searchPosts(@Param("account") String account,@Param("pid") Integer pid,@Param("title") String title,@Param("text") String text);
 
 
 }
