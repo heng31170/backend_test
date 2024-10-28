@@ -16,7 +16,7 @@ public interface GetPostsService {
     // 查询点赞
     List<Integer> queLike(String account);
     // 获取指定帖子
-    List<Posting> getSepcifyPosts(String account);
+    List<Posting> getSpecifyPosts(String account);
     // 获取动态
     List<Posting> getFollowPosts(String account);
     // 搜索帖子

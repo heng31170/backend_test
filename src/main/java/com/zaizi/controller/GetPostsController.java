@@ -74,13 +74,11 @@ public class GetPostsController {
     public ResponseEntity<?> getSpecifyPosts(@RequestParam(value = "poster") String account) {
         log.info("获取指定帖子,发帖者:{}",account);
         try {
-            List<Posting> postings = getPostsService.getSepcifyPosts(account);
-            if(!postings.isEmpty()) {
-                return ResponseEntity.ok(Map.of("postings",postings));
-            }
-            return ResponseEntity.badRequest().body(Map.of("message","the postings is empty"));
+            List<Posting> postings = getPostsService.getSpecifyPosts(account);
+            return ResponseEntity.ok(Map.of("postings",postings));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error","error:"+e.getMessage()));
+            log.error("获取指定帖子失败:{}",e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("error","error:"));
         }
     }
     // 获取动态

@@ -32,6 +32,7 @@ public class GetPostsServiceImpl implements GetPostsService {
         getPostsMapper.dislikePost(posting);
     }
 
+    // 查询点赞
     @Override
     public List<Integer> queLike(String account) {
         List<Integer> likeList = getPostsMapper.queLikePost(account);
@@ -40,7 +41,7 @@ public class GetPostsServiceImpl implements GetPostsService {
 
     // 指定帖子
     @Override
-    public List<Posting> getSepcifyPosts(String account) {
+    public List<Posting> getSpecifyPosts(String account) {
         return getPostsMapper.getSpecifyPosts(account);
     }
     // 获取动态
