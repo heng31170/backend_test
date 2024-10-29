@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zaizi.mapper.CommentMapper">
+
+    <delete id="delComment">
+        DELETE FROM comments
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="pid != null">AND pid = #{pid}</if>
+            <if test="account != null">AND account = #{account}</if>
+            <if test="content != null">AND content = #{content}</if>
+            <if test="time != null">AND time = #{time}</if>
+        </where>
+    </delete>
+</mapper>
